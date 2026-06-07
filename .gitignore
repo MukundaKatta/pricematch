@@ -6,3 +6,9 @@ node_modules
 .vercel
 .next/
 out/
+
+# Next.js auto-generated types
+next-env.d.ts
+
+# npm lockfile (this project uses pnpm)
+package-lock.json

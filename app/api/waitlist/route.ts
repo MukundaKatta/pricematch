@@ -3,7 +3,13 @@ import { NextRequest, NextResponse } from "next/server";
 const WAITLIST_API = "https://waitlist-api-sigma.vercel.app/api/waitlist";
 
 export async function POST(req: NextRequest) {
-  const { email } = await req.json();
+  let body: unknown;
+  try {
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: "invalid JSON body" }, { status: 400 });
+  }
+  const email = (body as { email?: unknown } | null)?.email;
   if (!email || typeof email !== "string") {
     return NextResponse.json({ error: "email required" }, { status: 400 });
   }
